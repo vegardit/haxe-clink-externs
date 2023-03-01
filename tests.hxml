@@ -1,0 +1,14 @@
+extraParams.hxml
+-cp src
+-cp test
+-debug
+-D dump=pretty
+-lib haxe-doctest
+-lib no-spoon
+-D lua_ver=5.2
+-D lua_vanilla
+-dce std
+# ensures that haxe parses all modules even if DCE is set to full
+--macro include('clink')
+-main clink.TestRunner
+-lua target/lua/TestRunner.lua

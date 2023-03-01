@@ -1,0 +1,19 @@
+{
+   "name": "clink-externs",
+   "url": "https://github.com/vegardit/haxe-clink-externs",
+   "license": "MIT",
+   "classPath": "src/",
+   "tags": [
+      "clink",
+      "externs",
+      "lua",
+      "vegardit"
+   ],
+   "description": "Externs for the Clink API (https://chrisant996.github.io/clink/clink.html#extending-clink-with-lua)",
+   "contributors": ["vegardit"],
+   "releasenote": "See https://github.com/vegardit/haxe-clink-externs/blob/main/CHANGELOG.md",
+   "version": "0.1.0",
+   "dependencies": {
+      "no-spoon": ""
+   }
+}

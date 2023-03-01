@@ -1,0 +1,3 @@
+--macro clink.internal.Macros.ensureMinimumHaxeVersion()
+--macro clink.internal.Macros.patchHaxeForClinkLua()
+--macro nullSafety("clink", Strict)

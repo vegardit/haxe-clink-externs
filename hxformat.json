@@ -1,0 +1,90 @@
+{
+	"emptyLines": {
+		"afterFileHeaderComment": 0,
+		"abstractEmptyLines": {
+			"afterPrivateFunctions": 1,
+			"afterPrivateVars": 1,
+			"afterStaticFunctions": 1,
+			"afterStaticVars": 1,
+			"afterVars": 1,
+			"beginType": 1,
+			"betweenFunctions": 1,
+			"betweenStaticFunctions": 1,
+			"existingBetweenFields": "remove"
+		},
+		"classEmptyLines": {
+			"afterPrivateFunctions": 1,
+			"afterPrivateVars": 1,
+			"afterStaticFunctions": 1,
+			"afterStaticVars": 1,
+			"afterVars": 1,
+			"beginType": 1,
+			"betweenFunctions": 1,
+			"betweenStaticFunctions": 1,
+			"existingBetweenFields": "remove"
+		},
+		"enumAbstractEmptyLines": {
+			"afterVars": 1,
+			"beginType": 0,
+			"betweenFunctions": 1,
+			"betweenVars": 0,
+			"existingBetweenFields": "remove"
+		},
+		"interfaceEmptyLines": {
+			"afterPrivateFunctions": 1,
+			"afterPrivateVars": 1,
+			"afterStaticFunctions": 1,
+			"afterStaticVars": 1,
+			"afterVars": 1,
+			"beginType": 0,
+			"betweenFunctions": 1,
+			"betweenStaticFunctions": 1,
+			"existingBetweenFields": "remove"
+		},
+		"beforeDocCommentEmptyLines": "ignore",
+		"afterLeftCurly": "keep",
+		"betweenTypes": 2,
+		"maxAnywhereInFile": 2
+	},
+	"indentation": {
+		"character": "   ",
+		"conditionalPolicy": "alignedIncrease",
+		"tabWidth": 3
+	},
+	"lineEnds": {
+		"emptyCurly": "break"
+	},
+	"sameLine": {
+		"caseBody": "keep",
+		"ifBody": "keep"
+	},
+	"wrapping": {
+		"maxLineLength": 140,
+		"callParameter": {
+			"rules": [
+				{
+					"conditions": [
+						{
+							"cond": "ItemCountLargerThan",
+							"value": 2
+						}
+					],
+					"type": "keep"
+				}
+			]
+		},
+		"methodChain": {
+			"rules": [
+				{
+					"conditions": [
+						{
+							"cond": "ItemCountLargerThan",
+							"value": 1
+						}
+					],
+					"type": "keep"
+				}
+			]
+		}
+	}
+}
