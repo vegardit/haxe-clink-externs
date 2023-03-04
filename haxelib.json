@@ -9,7 +9,7 @@
       "lua",
       "vegardit"
    ],
-   "description": "Externs for the Clink API (https://chrisant996.github.io/clink/clink.html#extending-clink-with-lua)",
+   "description": "Externs for the Clink API (https://chrisant996.github.io/clink/clink.html#extending-clink-with-lua) to implement Windows command completions.",
    "contributors": ["vegardit"],
    "releasenote": "See https://github.com/vegardit/haxe-clink-externs/blob/main/CHANGELOG.md",
    "version": "0.1.0",

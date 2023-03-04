@@ -13,7 +13,7 @@
 
 ## <a name="what-is-it"></a>What is it?
 
-A [haxelib](http://lib.haxe.org/documentation/using-haxelib/) with Lua externs for the [Clink API](https://chrisant996.github.io/clink/clink.html#extending-clink-with-lua)
+A [haxelib](http://lib.haxe.org/documentation/using-haxelib/) with Lua [externs](https://haxe.org/manual/lf-externs.html) for the [Clink API](https://chrisant996.github.io/clink/clink.html#extending-clink-with-lua)
 to develop custom command line completions for [Clink](https://github.com/chrisant996/clink).
 
 ### Requirements/Limitations
