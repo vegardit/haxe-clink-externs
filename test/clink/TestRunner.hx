@@ -104,7 +104,7 @@ class TestRunner extends DocTestRunner {
       final t = LuaTable.fromArray(["a"]);
       assertFalse(t.isEmpty());
       t.add("b");
-      assertEquals(t.length(), 2);
+      assertEquals(t.size(), 2);
       assertEquals('$t', "{ 1 : a, 2 : b }");
       assertTrue(t.containsKey(1));
       assertTrue(t.containsKey(2));
@@ -113,7 +113,7 @@ class TestRunner extends DocTestRunner {
 
       t["x"] = "c";
       t.y = "d";
-      assertEquals(t.length(), 4);
+      assertEquals(t.size(), 4);
       assertTrue(t.containsKey("x"));
       assertTrue(t.containsValue("c"));
 
@@ -130,7 +130,7 @@ class TestRunner extends DocTestRunner {
 
       final m = t.asLuaMap();
       assertFalse(m.isEmpty());
-      assertEquals(m.length(), 2);
+      assertEquals(m.size(), 2);
       assertFalse(a.contains("x"));
       assertFalse(a.contains("y"));
       assertFalse(m.containsValue("a"));

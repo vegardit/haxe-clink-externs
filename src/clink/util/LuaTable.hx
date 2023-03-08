@@ -36,10 +36,10 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
    inline public function isEmpty():Bool
       return !keys().hasNext();
 
-   public function length():Int {
-      var len = 0;
-      forEach((k, v) -> len++);
-      return len;
+   public function size():Int {
+      var size = 0;
+      forEach((k, v) -> size++);
+      return size;
    }
 
    @:arrayAccess
