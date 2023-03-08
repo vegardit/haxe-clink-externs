@@ -15,27 +15,22 @@ import lua.Table;
 abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
 
    @:from
-   inline public static function from<V>(...value:V):LuaArray<V> {
+   inline public static function from<V>(...value:V):LuaArray<V>
       return Table.fromArray(value);
-   }
 
    @:from
-   inline public static function fromArray<V>(arr:Array<V>):LuaArray<V> {
+   inline public static function fromArray<V>(arr:Array<V>):LuaArray<V>
       return Table.fromArray(arr);
-   }
 
    @:from
-   inline private static function fromLuaTable<V>(t:LuaTable<V>):LuaArray<V> {
+   inline private static function fromLuaTable<V>(t:LuaTable<V>):LuaArray<V>
       return cast t;
-   }
 
-   public function new() {
+   inline public function new()
       this = Table.create();
-   }
 
-   public function isEmpty():Bool {
+   public inline function isEmpty():Bool
       return !iterator().hasNext();
-   }
 
    public function length():Int {
       var len = 0;
@@ -44,9 +39,8 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
    }
 
    @:arrayAccess
-   inline public function get(pos:Int) {
+   inline public function get(pos:Int)
       return this[pos];
-   }
 
    @:arrayAccess
    inline public function set(pos:Int, v:V):V {
@@ -54,9 +48,8 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
       return v;
    }
 
-   inline public function add(v:V):Void {
+   inline public function add(v:V):Void
       Table.insert(this, v);
-   }
 
    public function contains(v:V):Bool {
       var it = PairTools.ipairsIterator(this);
@@ -65,9 +58,8 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
       return false;
    }
 
-   inline public function forEach(func:(index:Int, value:V) -> Void):Void {
+   inline public function forEach(func:(index:Int, value:V) -> Void):Void
       PairTools.ipairsEach(this, func);
-   }
 
    public function iterator():Iterator<V> {
       final it = PairTools.ipairsIterator(this);
@@ -90,7 +82,6 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
 
    /** Creates a new Haxe Array instance containing all indexed values */
    @:to
-   inline public function toArray():Array<V> {
+   inline public function toArray():Array<V>
       return Table.toArray(this);
-   }
 }

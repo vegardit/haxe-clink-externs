@@ -17,22 +17,18 @@ import lua.Table;
 abstract LuaMap<V>(Table<String, V>) from Table<String, V> to Table<String, V> {
 
    @:from
-   inline public static function fromDynamic<V>(dyn:Dynamic):LuaMap<V> {
+   inline public static function fromDynamic<V>(dyn:Dynamic):LuaMap<V>
       return Table.fromDynamic(dyn);
-   }
 
    @:from
-   inline public static function fromMap<String, V>(map:Map<String, V>):LuaMap<V> {
+   inline public static function fromMap<String, V>(map:Map<String, V>):LuaMap<V>
       return Table.fromMap(map);
-   }
 
-   inline public function new() {
+   inline public function new()
       this = Table.create();
-   }
 
-   public function isEmpty():Bool {
+   public function isEmpty():Bool
       return !keys().hasNext();
-   }
 
    public function length():Int {
       var len = 0;
@@ -41,19 +37,17 @@ abstract LuaMap<V>(Table<String, V>) from Table<String, V> to Table<String, V> {
    }
 
    @:arrayAccess
-   public inline function get(key:String) {
+   inline public function get(key:String)
       return this[untyped key];
-   }
 
    @:arrayAccess
-   public inline function set(key:String, v:V):V {
+   inline public function set(key:String, v:V):V {
       this[untyped key] = v;
       return v;
    }
 
-   inline public function containsKey(k:String):Bool {
+   inline public function containsKey(k:String):Bool
       return this[untyped k] != null;
-   }
 
    public function containsValue(v:V):Bool {
       var it = PairTools.pairsIterator(this);
@@ -117,9 +111,8 @@ abstract LuaMap<V>(Table<String, V>) from Table<String, V> to Table<String, V> {
    }
 
    /** Creates a new dynamic object where all string-mapped values are set as fields */
-   inline public function toObject<T>():Dynamic<T> {
+   inline public function toObject<T>():Dynamic<T>
       return Table.toObject(cast this);
-   }
 
    /** Creates a new Haxe Map instance containing all mappings */
    @:to

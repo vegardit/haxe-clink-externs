@@ -18,9 +18,9 @@ class IntStepIterator /*extends IntIterator*/ {
       this.step = step;
    }
 
-   public inline function hasNext()
+   inline public function hasNext()
       return i < stopExclusive;
 
-   public inline function next()
+   inline public function next()
       return (i += step) - step;
 }
