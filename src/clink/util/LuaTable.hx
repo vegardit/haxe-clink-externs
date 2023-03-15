@@ -59,7 +59,7 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
       return this[k] != null;
 
    public function containsValue(v:V):Bool {
-      var it = PairTools.pairsIterator(this);
+      final it = PairTools.pairsIterator(this);
       while (it.hasNext())
          if (it.next().value == v) return true;
       return false;
@@ -68,32 +68,14 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
    inline public function forEach(func:(index:IntOrString, value:V) -> Void):Void
       PairTools.pairsEach(this, func);
 
-   public function keyValueIterator():KeyValueIterator<IntOrString, V> {
-      final it = PairTools.pairsIterator(this);
-      return {
-         next: () -> {
-            var res = it.next();
-            return {key: res.index, value: res.value};
-         },
-         hasNext: () -> return it.hasNext()
-      }
-   }
+   inline public function keyValueIterator():Iterator<Pair<IntOrString, V>>
+      return PairTools.pairsIterator(this);
 
-   public function keys():Iterator<IntOrString> {
-      final it = PairTools.pairsIterator(this);
-      return {
-         next: () -> it.next().index,
-         hasNext: () -> return it.hasNext()
-      }
-   }
+   inline public function keys():PairKeyIterator<IntOrString>
+      return keyValueIterator();
 
-   public function values():Iterator<V> {
-      final it = PairTools.pairsIterator(this);
-      return {
-         next: () -> it.next().value,
-         hasNext: () -> return it.hasNext()
-      }
-   }
+   inline public function values():PairValueIterator<V>
+      return keyValueIterator();
 
    @:to
    inline public function asLuaArray():LuaArray<V>
@@ -103,7 +85,7 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
    inline public function asLuaMap():LuaMap<V>
       return this;
 
-   /** Creates a new Haxe Map instance containing all mappings */
+   /** Creates a new Haxe Map instance containing all mappings (i.e. string- and int-keyed entries)*/
    @:to
    inline public function toMap():Map<String, V>
       return Table.toMap(this);
@@ -111,4 +93,41 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
    /** Creates a new dynamic object where all string-mapped values are set as fields */
    inline public function toObject<T>():Dynamic<T>
       return Table.toObject(cast this);
+}
+
+private typedef NativePair<A, B> = {index:A, value:B}
+
+
+@:forward(value)
+abstract Pair<A, B>(NativePair<A, B>) from NativePair<A, B> to NativePair<A, B> {
+
+   public var key(get, set):A;
+
+   inline function get_key():A
+      return this.index;
+
+   inline function set_key(val:A):A {
+      this.index = val;
+      return val;
+   }
+}
+
+
+abstract PairKeyIterator<K>(Iterator<Pair<K, Dynamic>>) from Iterator<Pair<K, Dynamic>> {
+
+   inline public function hasNext():Bool
+      return this.hasNext();
+
+   inline public function next():K
+      return this.next().key;
+}
+
+
+abstract PairValueIterator<V>(Iterator<Pair<Dynamic, V>>) from Iterator<Pair<Dynamic, V>> {
+
+   inline public function hasNext():Bool
+      return this.hasNext();
+
+   inline public function next():V
+      return this.next().value;
 }

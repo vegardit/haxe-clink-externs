@@ -134,6 +134,18 @@ class TestRunner extends DocTestRunner {
       assertTrue(t.containsKey("x"));
       assertTrue(t.containsValue("c"));
 
+      for (p in t.keyValueIterator()) {
+         assertNotNull(p.key);
+         assertNotNull(p.value);
+      }
+      final keys = [for (e in t.keys()) e];
+      keys.sort((a, b) -> Reflect.compare(Std.string(a), Std.string(b)));
+      assertEquals(keys, [1, 2, "x", "y"]);
+
+      final values = [for (e in t.values()) e];
+      values.sort(Reflect.compare);
+      assertEquals(values, ["a", "b", "c", "d"]);
+
       // test array view
       final a = t.asLuaArray();
       assertFalse(a.isEmpty());
@@ -145,6 +157,7 @@ class TestRunner extends DocTestRunner {
       assertEquals(a.toArray(), ["a", "b"]);
       assertEquals('${[for (k => v in a.keyValueIterator()) '$k=>$v']}', "[1=>a,2=>b]");
 
+      // test map view
       final m = t.asLuaMap();
       assertFalse(m.isEmpty());
       assertEquals(m.size(), 2);
