@@ -6,6 +6,8 @@
  */
 package clink.util;
 
+import clink.internal.Iterators.KeyIterator;
+import clink.internal.Iterators.ValueIterator;
 import lua.Lua;
 import lua.PairTools;
 import lua.Table;
@@ -94,21 +96,11 @@ abstract LuaMap<V>(Table<String, V>) from Table<String, V> to Table<String, V> {
       }
    }
 
-   public function keys():Iterator<String> {
-      final it = keyValueIterator();
-      return {
-         next: () -> it.next().key,
-         hasNext: () -> it.hasNext()
-      }
-   }
+   inline public function keys():KeyIterator<String>
+      return keyValueIterator();
 
-   public function values():Iterator<V> {
-      final it = keyValueIterator();
-      return {
-         next: () -> it.next().value,
-         hasNext: () -> it.hasNext()
-      }
-   }
+   inline public function values():ValueIterator<V>
+      return keyValueIterator();
 
    /** Creates a new dynamic object where all string-mapped values are set as fields */
    inline public function toObject<T>():Dynamic<T>

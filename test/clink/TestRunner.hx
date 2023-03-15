@@ -100,6 +100,23 @@ class TestRunner extends DocTestRunner {
       assertEquals('${[for (k => v in a.keyValueIterator()) '$k=>$v']}', "[1=>a,2=>b]");
    }
 
+   function testLuaMap() {
+      final m = LuaMap.fromMap(["a" => 1]);
+      assertFalse(m.isEmpty());
+      m["b"] = 2;
+      assertEquals(m.size(), 2);
+      assertTrue(m.containsKey("a"));
+      assertTrue(m.containsValue(1));
+      assertTrue(m.containsKey("b"));
+      assertTrue(m.containsValue(2));
+      final keys = [for (k in m.keys()) k];
+      keys.sort(Reflect.compare);
+      assertEquals(keys, ["a", "b"]);
+      final values = [for (v in m.values()) v];
+      values.sort(Reflect.compare);
+      assertEquals(values, [1, 2]);
+   }
+
    function testLuaTable() {
       final t = LuaTable.fromArray(["a"]);
       assertFalse(t.isEmpty());
