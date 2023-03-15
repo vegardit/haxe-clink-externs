@@ -6,6 +6,7 @@
  */
 package clink.util;
 
+import clink.util.LuaTable.Pair;
 import lua.PairTools;
 import lua.Table;
 
@@ -52,9 +53,9 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
       Table.insert(this, v);
 
    public function contains(v:V):Bool {
-      var it = PairTools.ipairsIterator(this);
+      final it = iterator();
       while (it.hasNext())
-         if (it.next().value == v) return true;
+         if (it.next() == v) return true;
       return false;
    }
 
@@ -62,23 +63,15 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
       PairTools.ipairsEach(this, func);
 
    public function iterator():Iterator<V> {
-      final it = PairTools.ipairsIterator(this);
+      final it = keyValueIterator();
       return {
          next: () -> it.next().value,
          hasNext: () -> return it.hasNext()
       }
    }
 
-   public function keyValueIterator():KeyValueIterator<Int, V> {
-      final it = PairTools.ipairsIterator(this);
-      return {
-         next: () -> {
-            var res = it.next();
-            return {key: res.index, value: res.value};
-         },
-         hasNext: () -> return it.hasNext()
-      }
-   }
+   inline public function keyValueIterator():Iterator<Pair<Int, V>>
+      return PairTools.ipairsIterator(this);
 
    /** Creates a new Haxe Array instance containing all indexed values */
    @:to
