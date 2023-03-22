@@ -9,6 +9,9 @@ package clink.util;
 import lua.PairTools;
 import lua.Table;
 
+import clink.internal.Either2;
+import clink.internal.Either3;
+
 /** Lua table keys can be either Int or String */
 typedef IntOrString = haxe.extern.EitherType<Int, String>;
 
@@ -30,8 +33,18 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
    inline public static function fromMap<IntOrString, V>(map:Map<IntOrString, V>):LuaTable<V>
       return Table.fromMap(map);
 
-   inline public function new()
-      this = Table.create();
+   public function new(?arr:Array<V>, ?map:Map<IntOrString, V>) {
+      if (arr == null) {
+         if (map == null)
+            this = Table.create();
+         else
+            this = fromMap(map);
+      } else {
+         this = fromArray(arr);
+         if (map != null)
+            setAll(map);
+      }
+   }
 
    inline public function isEmpty():Bool
       return !keys().hasNext();
@@ -52,10 +65,16 @@ abstract LuaTable<V>(Table<IntOrString, V>) from Table<IntOrString, V> to Table<
       return v;
    }
 
-   inline public function add(v:V):Void
-      Table.insert(this, v);
+   inline public function setAll(items:Either2<Map<IntOrString, V>, Dynamic>):Void
+      asLuaMap().setAll(items);
 
-   inline public function containsKey(k:Dynamic):Bool
+   inline public function add(v:V):Void
+      asLuaArray().add(v);
+
+   inline public function addAll(items:Either3<Iterator<V>, Iterable<V>, Array<V>>):Void
+      asLuaArray().addAll(items);
+
+   inline public function containsKey(k:IntOrString):Bool
       return this[k] != null;
 
    public function containsValue(v:V):Bool {

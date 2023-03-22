@@ -6,11 +6,13 @@
  */
 package clink.util;
 
-import clink.internal.Iterators.KeyIterator;
-import clink.internal.Iterators.ValueIterator;
 import lua.Lua;
 import lua.PairTools;
 import lua.Table;
+
+import clink.internal.Either2;
+import clink.internal.Iterators.KeyIterator;
+import clink.internal.Iterators.ValueIterator;
 
 /**
  * Provides access to all String-keyed entries of a Lua table
@@ -46,6 +48,13 @@ abstract LuaMap<V>(Table<String, V>) from Table<String, V> to Table<String, V> {
    inline public function set(key:String, v:V):V {
       this[untyped key] = v;
       return v;
+   }
+
+   public function setAll(items:Either2<Map<String, V>, Dynamic>):Void {
+      switch(items.value) {
+         case a(map): for (k => v in map.keyValueIterator()) this[untyped k] = v;
+         case b(dyn): for (f in Reflect.fields(dyn)) this[untyped f] = Reflect.field(dyn, f);
+      }
    }
 
    inline public function containsKey(k:String):Bool

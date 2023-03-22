@@ -6,9 +6,11 @@
  */
 package clink.util;
 
-import clink.util.LuaTable.Pair;
 import lua.PairTools;
 import lua.Table;
+
+import clink.internal.Either3;
+import clink.util.LuaTable.Pair;
 
 /**
  * Provides a numeric-indexed array view over a Lua table, i.e. only accessing entries with numeric index
@@ -51,6 +53,14 @@ abstract LuaArray<V>(Table<Int, V>) from Table<Int, V> to Table<Int, V> {
 
    inline public function add(v:V):Void
       Table.insert(this, v);
+
+   public function addAll(items:Either3<Iterator<V>, Iterable<V>, Array<V>>):Void {
+      switch(items.value) {
+         case a(it): for (e in it) add(e);
+         case b(it): for (e in it) add(e);
+         case c(arr): for (e in arr) add(e);
+      }
+   }
 
    public function contains(v:V):Bool {
       final it = iterator();
