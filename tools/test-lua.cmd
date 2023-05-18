@@ -12,4 +12,4 @@ popd
 if not %rc% == 0 exit /b %rc%
 
 echo Testing...
-C:\apps\dev\coredev\console\bin\clink\clink.bat lua "%~dp0..\target\lua\TestRunner.lua"
+clink lua "%~dp0..\target\lua\TestRunner.lua"
