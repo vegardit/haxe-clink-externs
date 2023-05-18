@@ -51,6 +51,7 @@ jobs:
         - windows-latest
         haxe:
         - nightly
+        - latest
         - 4.2.5
     steps:
     - name: Show environment variables
@@ -58,7 +59,6 @@ jobs:
 
     - name: Git Checkout
       uses: actions/checkout@v3 #https://github.com/actions/checkout
-
 
     - name: "Install: Clink"
       run: |
