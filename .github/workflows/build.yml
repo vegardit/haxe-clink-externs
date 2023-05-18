@@ -64,7 +64,7 @@ jobs:
       run: |
         set -eux
         pushd $HOME
-        curl -sSfL https://github.com/chrisant996/clink/releases/download/v1.4.19/clink.1.4.19.57e404.zip -o clink.zip
+        curl -sSfL https://github.com/chrisant996/clink/releases/download/v1.4.24/clink.1.4.24.688975.zip -o clink.zip
         unzip clink.zip -d clink
         cp clink/clink_x64.exe clink/clink.exe
 
