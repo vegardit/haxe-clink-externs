@@ -12,6 +12,17 @@ package clink.api;
  */
 @:native("path")
 extern class Path {
+
+   /** https://chrisant996.github.io/clink/clink.html#path.fnmatch
+    * ```
+    * >>> Path.fnMatch("[[:digit:]]*", "1") == true
+    * >>> Path.fnMatch("[[:digit:]]*", "a") == false
+    * ```
+    * @since clink 1.4.24
+    */
+   @:native("fnmatch")
+   static function fnMatch(pattern:String, path:String, ?flag:String):Bool;
+
    /** https://chrisant996.github.io/clink/clink.html#path.getbasename
     * ```
     * >>> Path.getBaseName("foo\\bar") == "bar"
