@@ -137,22 +137,33 @@ extern class OS {
    @:native("gettemppath")
    static function getTempPath():ResultOrError<Null<String>>;
 
-   /** https://chrisant996.github.io/clink/clink.html#os.globdirs */
-   @:native("globdirs")
-   overload static function globDirs(globpattern:String):LuaArray<String>;
+   /** https://chrisant996.github.io/clink/clink.html#os.globmatch
+    * @since clink 1.4.24 */
+   @:native("globmatch")
+   overload static function globMatch(pattern:String):LuaArray<String>;
+
+   /** https://chrisant996.github.io/clink/clink.html#os.globmatch
+    * @since clink 1.4.24 */
+   @:native("globmatch")
+   overload static function globMatch(pattern:String, ?extraInfo:EitherType<Bool, Int>,
+      ?filter:GlobFilterOpts):LuaArray<EitherType<String, GlobFileInfo>>;
 
    /** https://chrisant996.github.io/clink/clink.html#os.globdirs */
    @:native("globdirs")
-   overload static function globDirs(globpattern:String, ?extrainfo:EitherType<Bool, Int>,
+   overload static function globDirs(pattern:String):LuaArray<String>;
+
+   /** https://chrisant996.github.io/clink/clink.html#os.globdirs */
+   @:native("globdirs")
+   overload static function globDirs(pattern:String, ?extraInfo:EitherType<Bool, Int>,
       ?filter:GlobFilterOpts):LuaArray<EitherType<String, GlobFileInfo>>;
 
    /** https://chrisant996.github.io/clink/clink.html#os.globfiles */
    @:native("globfiles")
-   overload static function globFiles(globpattern:String):LuaArray<String>;
+   overload static function globFiles(pattern:String):LuaArray<String>;
 
    /** https://chrisant996.github.io/clink/clink.html#os.globfiles */
    @:native("globfiles")
-   overload static function globFiles(globpattern:String, ?extrainfo:EitherType<Bool, Int>,
+   overload static function globFiles(pattern:String, ?extraInfo:EitherType<Bool, Int>,
       ?filter:GlobFilterOpts):LuaArray<EitherType<String, GlobFileInfo>>;
 
    /** https://chrisant996.github.io/clink/clink.html#os.isdir
