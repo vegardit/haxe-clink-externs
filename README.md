@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/vegardit/haxe-clink-externs/workflows/Build/badge.svg "GitHub Actions")](https://github.com/vegardit/haxe-clink-externs/actions?query=workflow%3A%22Build%22)
 [![Release](https://img.shields.io/github/release/vegardit/haxe-clink-externs.svg)](http://lib.haxe.org/p/clink-externs)
 [![License](https://img.shields.io/github/license/vegardit/haxe-clink-externs.svg?label=license)](#license)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.1%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 1. [What is it?](#what-is-it)
 1. [Installation](#installation)
