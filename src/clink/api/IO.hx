@@ -12,18 +12,27 @@ import lua.FileHandle;
  * https://chrisant996.github.io/clink/clink.html#io
  * https://github.com/chrisant996/clink/blob/master/clink/lua/src/io_api.cpp
  */
+@:ClinkAPI("1.7.7")
 @:native("io")
 extern class IO {
-   /** https://chrisant996.github.io/clink/clink.html#io.open
-    * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/src/io_api.cpp#L549 */
-   static function open(filaname:String, ?mode:String):OpenResult;
+   /** https://chrisant996.github.io/clink/clink.html#io.open */
+   @:SinceClink("0.0.1")
+   static function open(filaname:String, mode:String = "r"):OpenResult;
 
-   /** https://chrisant996.github.io/clink/clink.html#io.popenrw
-    * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/src/io_api.cpp#L337 */
+   /** https://chrisant996.github.io/clink/clink.html#io.popenrw */
+   @:SinceClink("1.1.42")
    static function popenrw(command:String, mode:FileMode = TEXT):PopenrwResult;
 
-   /** https://chrisant996.github.io/clink/clink.html#io.truncate
-    * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/src/io_api.cpp#L661 */
+   /** https://chrisant996.github.io/clink/clink.html#io.popenrw */
+   @:SinceClink("1.2.10")
+   static function popenyield(command:String, mode:FileMode = TEXT):PopenyieldResult;
+
+   /** https://chrisant996.github.io/clink/clink.html#io.sopen */
+   @:SinceClink("1.3.18")
+   static function sopen(filename:String, mode:String = "r", deny:String = ""):PopenyieldResult;
+
+   /** https://chrisant996.github.io/clink/clink.html#io.truncate */
+   @:SinceClink("1.3.41")
    static function truncate(file:FileHandle):TruncateResult;
 }
 
@@ -46,6 +55,15 @@ extern class OpenResult {
 extern class PopenrwResult {
    final stdout:FileHandle;
    final stdint:FileHandle;
+}
+
+
+@:multiReturn
+extern class PopenyieldResult {
+   final stdout:FileHandle;
+
+   @:SinceClink("1.3.31")
+   final close:Void->Int;
 }
 
 

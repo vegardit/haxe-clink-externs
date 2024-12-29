@@ -10,6 +10,7 @@ package clink.api;
  * https://chrisant996.github.io/clink/clink.html#path
  * https://github.com/chrisant996/clink/blob/master/clink/lua/src/path_api.cpp
  */
+@:ClinkAPI("1.7.7")
 @:native("path")
 extern class Path {
 
@@ -18,8 +19,8 @@ extern class Path {
     * >>> Path.fnMatch("[[:digit:]]*", "1") == true
     * >>> Path.fnMatch("[[:digit:]]*", "a") == false
     * ```
-    * @since clink 1.4.24
     */
+   @:SinceClink("1.4.24")
    @:native("fnmatch")
    static function fnMatch(pattern:String, path:String, ?flag:String):Bool;
 
@@ -28,6 +29,7 @@ extern class Path {
     * >>> Path.getBaseName("foo\\bar") == "bar"
     * ```
     */
+   @:SinceClink("1.1.0")
    @:native("getbasename")
    static function getBaseName(path:String):String;
 
@@ -36,6 +38,7 @@ extern class Path {
     * >>> Path.getDirectory("foo\\bar") == "foo"
     * ```
     */
+   @:SinceClink("1.1.0")
    @:native("getdirectory")
    static function getDirectory(path:String):Null<String>;
 
@@ -45,6 +48,7 @@ extern class Path {
     * >>> Path.getDrive("foo\\bar") == null
     * ```
     */
+   @:SinceClink("1.1.0")
    @:native("getdrive")
    static function getDrive(path:String):Null<String>;
 
@@ -54,6 +58,7 @@ extern class Path {
     * >>> Path.getExtension("C:\\foo\\bar") == ""
     * ```
     */
+   @:SinceClink("1.1.0")
    @:native("getextension")
    static function getExtension(path:String):String;
 
@@ -63,14 +68,17 @@ extern class Path {
     * >>> Path.getExtension("C:\\foo\\bar") == ""
     * ```
     */
+   @:SinceClink("1.1.0")
    @:native("getname")
    static function getName(path:String):String;
 
    /** https://chrisant996.github.io/clink/clink.html#path.isexecext */
+   @:SinceClink("1.1.5")
    @:native("isexecext")
    static function isExecExt(path:String):Bool;
 
    /** https://chrisant996.github.io/clink/clink.html#path.join */
+   @:SinceClink("1.1.0")
    static function join(first:String, second:String):String;
 
    /** https://chrisant996.github.io/clink/clink.html#path.normalise */
@@ -78,6 +86,7 @@ extern class Path {
    static function normalize(path:String, ?separator:String):String;
 
    /** https://chrisant996.github.io/clink/clink.html#path.toparent */
+   @:SinceClink("1.2.0")
    @:native("toparent")
    static function toParent(path:String, ?separator:String):ToParentResult;
 }

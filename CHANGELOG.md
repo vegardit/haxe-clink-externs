@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### Changed
+- require Haxe 4.3 or higher
+- update API to match Clink 1.7.7 API
+
+
 ## [0.2.0] - 2023-05-18
 
 ### Added

@@ -69,7 +69,6 @@ jobs:
         - nightly
         - latest
         - 4.3.6
-        - 4.2.5
 
     steps:
     - name: "Show: GitHub context"
@@ -90,7 +89,7 @@ jobs:
       run: |
         set -eux
         pushd $HOME
-        curl -sSfL https://github.com/chrisant996/clink/releases/download/v1.4.24/clink.1.4.24.688975.zip -o clink.zip
+        curl -sSfL https://github.com/chrisant996/clink/releases/download/v1.7.7/clink.1.7.7.521fa7.zip -o clink.zip
         unzip clink.zip -d clink
         cp clink/clink_x64.exe clink/clink.exe
 
@@ -118,7 +117,6 @@ jobs:
       uses: vegardit/haxe-reusable-workflows/.github/actions/setup-haxe@dev
       with:
         haxe-reusable-workflows-version: dev
-
         haxe-version: ${{ matrix.haxe }}
         haxe-libs: |
           haxe-doctest 

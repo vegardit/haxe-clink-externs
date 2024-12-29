@@ -114,72 +114,87 @@ abstract ArgMatcher(ArgMatcherExtern) from ArgMatcherExtern to ArgMatcherExtern 
    }
 }
 
+@:ClinkAPI("1.7.7")
 @:allow(clink.api.ArgMatcher)
 @:allow(clink.api.ArgBuilder)
 private extern class ArgMatcherExtern {
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:addarg
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L750 */
+   @:SinceClink("1.0.0")
    @:native("addarg")
    private overload function _addarg(choices:LuaTable<Any>):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:adddescriptions
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L986 */
+   @:SinceClink("1.2.38")
    @:native("adddescriptions")
    private function _adddescriptions(...descr:LuaTable<Any>):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:addflags
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L803 */
+   @:SinceClink("1.0.0")
    @:native("addflags")
    private function _addflags(choices:LuaTable<Any>):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:chaincommand
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L1090 */
+   @:SinceClink("1.3.13")
    @:native("chaincommand")
    function chainCommand():ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:hideflags
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L860 */
+   @:SinceClink("1.3.3")
    @:native("hideflags")
    function hideFlags(...flags:String):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:loop
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L888 */
+   @:SinceClink("0.4.9")
    function loop(index:Int):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:nofiles
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L1084 */
+   @:SinceClink("1.0.0")
    @:native("nofiles")
    function noFiles():ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:reset
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L722 */
+   @:SinceClink("1.3.10")
    function reset():ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:setclassifier
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L1138 */
+   @:SinceClink("1.3.10")
    @:native("setclassifier")
    function setClassifier(handler:Classifier):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:setdelayinit
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L1151 */
+   @:SinceClink("1.3.10")
    @:native("setdelayinit")
    function setDelayedInitializer(handler:(argMatcher:ArgMatcher, commandWord:String) -> Void):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:setendofflags
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L964 */
+   @:SinceClink("1.3.12")
    @:native("setendofflags")
-   public extern overload function setEndOfFlags(enabled:Bool):ArgMatcher;
+   overload function setEndOfFlags(enabled:Bool):ArgMatcher;
 
+   @:SinceClink("1.3.12")
    @:native("setendofflags")
-   public extern overload function setEndOfFlags(endofflags:String = "--"):ArgMatcher;
+   overload function setEndOfFlags(endofflags:String = "--"):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:setflagprefix
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L907 */
+   @:SinceClink("1.0.0")
    @:native("setflagprefix")
    function setFlagPrefix(...prefixes:String):ArgMatcher;
 
    /** https://chrisant996.github.io/clink/clink.html#_argmatcher:setflagsanywhere
     * https://github.com/chrisant996/clink/blob/236abadf5f9569bc93c8b92f0912709154a527aa/clink/lua/scripts/arguments.lua#L947 */
+   @:SinceClink("1.3.12")
    @:native("setflagsanywhere")
    function setFlagsAnywhere(enabled:Bool):ArgMatcher;
 }

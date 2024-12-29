@@ -15,8 +15,8 @@ class Macros {
 
    macro //
    public static function ensureMinimumHaxeVersion() {
-      #if (haxe_ver < 4.2)
-         throw 'ERROR: Haxe 4.2 or higher is required!';
+      #if (haxe_ver < 4.3)
+         throw 'ERROR: Haxe 4.3 or higher is required!';
       #end
       return macro {}
    }

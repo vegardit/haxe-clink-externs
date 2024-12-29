@@ -45,6 +45,16 @@ class TestRunner extends DocTestRunner {
       assertNotNull(Clink.versionPatch);
    }
 
+   function testConsole() {
+      final colorTable = Console.getColorTable();
+      if (Sys.getEnv("CI") == "true" && colorTable == null) {
+        return;
+      }
+      assertNotNull(colorTable.get(1));
+      assertNotNull(colorTable.get(colorTable.background));
+      assertNotNull(colorTable.get(colorTable.foreground));
+   }
+
    function testOS() {
       final orig = OS.getClipboardText();
       OS.setClipboardText("clink-test");
@@ -60,11 +70,38 @@ class TestRunner extends DocTestRunner {
       assertEquals(OS.getCWD(), Sys.getCwd());
    }
 
+   function testOS_findFiles() {
+      final findResult = OS.findFiles("*", 1);
+      final files1 = new Map<String, OS.FileInfo>();
+      var file:Dynamic;
+      while ((file = findResult.next()) != null) {
+         final fileInfo:OS.FileInfo = cast file;
+         files1.set(fileInfo.name, fileInfo);
+      }
+      findResult.close();
+      assertTrue(files1.exists("README.md"));
+
+      final files2 = new Map<String, OS.FileInfo>();
+      final findResult = OS.findFiles("*", 1);
+      for (file in findResult.files().toIterator()) {
+         final fileInfo:OS.FileInfo = cast file;
+         files2.set(fileInfo.name, fileInfo);
+      }
+      findResult.close();
+      assertTrue(files2.exists("README.md"));
+      assertEquals(files1, files2);
+   }
+
    function testSettings() {
+      assertEquals(Settings.formatcolor("0;1"), "bold");
+      assertEquals(Settings.formatcolor("1"), "sgr 1");
+      assertEquals(Settings.parsecolor("bold"), "0;1");
+      assertEquals(Settings.parsecolor("underline green"), "0;4;32");
+
       assertNull(Settings.get("enum"));
       assertTrue(Settings.addEnum("enum", ["a", "b"]));
       assertEquals(Settings.get("enum"), "a");
-      assertTrue(Settings.set("enum", "b"));
+      Settings.set("enum", "b");
       assertEquals(Settings.get("enum"), "b");
       assertFalse(Settings.set("enum", "c"));
       assertEquals(Settings.get("enum"), "b");
@@ -72,18 +109,22 @@ class TestRunner extends DocTestRunner {
       assertNull(Settings.get("bool"));
       assertTrue(Settings.add("bool", true));
       assertEquals(Settings.get("bool"), true);
-      assertTrue(Settings.set("bool", false));
+      Settings.set("bool", false);
       assertEquals(Settings.get("bool"), false);
       assertFalse(Settings.set("bool", "foo"));
       assertEquals(Settings.get("bool"), false);
+      Settings.clear("bool");
+      assertEquals(Settings.get("bool"), true);
 
       assertNull(Settings.get("int"));
       assertTrue(Settings.add("int", 1));
       assertEquals(Settings.get("int"), 1);
-      assertTrue(Settings.set("int", 2));
+      Settings.set("int", 2);
       assertEquals(Settings.get("int"), 2);
       assertFalse(Settings.set("int", "foo"));
       assertEquals(Settings.get("int"), 2);
+      Settings.clear("int");
+      assertEquals(Settings.get("int"), 1);
    }
 
    function testLuaArray() {
