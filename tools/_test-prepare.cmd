@@ -21,11 +21,15 @@ shift
 
 REM install common libs
 echo Checking required haxelibs...
-for %%i in (haxe-doctest) do (
+for %%i in (haxe-doctest no-spoon) do (
    haxelib list | findstr %%i >NUL
    if errorlevel 1 (
       echo Installing [%%i]...
-      haxelib install %%i
+      if "%%i" == "no-spoon" (
+        haxelib git no-spoon https://github.com/back2dos/no-spoon.git
+      ) else (
+        haxelib install %%i
+      )
    )
 )
 
